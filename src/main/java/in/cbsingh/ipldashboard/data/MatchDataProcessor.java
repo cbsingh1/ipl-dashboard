@@ -6,8 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 import in.cbsingh.ipldashboard.model.Match;
 
@@ -17,11 +15,14 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
 
     @Override
     public Match process(final MatchInput matchInput) throws Exception {
+        
         Match match = new Match();
-
         match.setId(Long.parseLong(matchInput.getId()));
         match.setCity(matchInput.getCity());
+
         match.setDate(LocalDate.parse(matchInput.getDate()));
+
+        match.setPlayerOfMatch(matchInput.getPlayer_of_match());
         match.setVenue(matchInput.getVenue());
 
         // Set Team 1 and Team 2 depending on the innings order
@@ -29,15 +30,13 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
 
         if ("bat".equals(matchInput.getToss_decision())) {
             firstInningsTeam = matchInput.getToss_winner();
-            secondInningsTeam = matchInput.getToss_winner().equals(matchInput.getTeam1())
-                    ? matchInput.getTeam2()
-                    : matchInput.getTeam1();
+            secondInningsTeam = matchInput.getToss_winner().equals(matchInput.getTeam1()) 
+                ? matchInput.getTeam2() : matchInput.getTeam1();
 
         } else {
             secondInningsTeam = matchInput.getToss_winner();
-            firstInningsTeam = matchInput.getToss_winner().equals(matchInput.getTeam1())
-                    ? matchInput.getTeam2()
-                    : matchInput.getTeam1();
+            firstInningsTeam = matchInput.getToss_winner().equals(matchInput.getTeam1()) 
+                ? matchInput.getTeam2() : matchInput.getTeam1();
         }
         match.setTeam1(firstInningsTeam);
         match.setTeam2(secondInningsTeam);
