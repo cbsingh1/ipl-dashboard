@@ -50,7 +50,7 @@ export const TeamPage = () => {
       ))}
 
       <div className='more-link'>
-        <Link>More</Link>
+        <Link to={`/team/${teamName}/matches/${process.env.REACT_APP_DATA_END_YEAR}`}>More ></Link>
       </div>
     </div>
   );
