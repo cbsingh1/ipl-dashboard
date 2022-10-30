@@ -6,13 +6,16 @@ import { PieChart } from 'react-minimal-pie-chart';
 
 import './TeamPage.scss';
 
+
 export const TeamPage = () => {
   const [team, setTeam] = useState({ matches: [] });
   const { teamName } = useParams();
 
   useEffect(() => {
     const fetchTeam = async () => {
-      const response = await fetch(`${process.env.REACT_APP_API_ROOT_URL}/team/${teamName}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_ROOT_URL}/team/${teamName}`
+      );
       const data = await response.json();
       setTeam(data);
     };
@@ -50,7 +53,11 @@ export const TeamPage = () => {
       ))}
 
       <div className='more-link'>
-        <Link to={`/team/${teamName}/matches/${process.env.REACT_APP_DATA_END_YEAR}`}>More ></Link>
+        <Link
+          to={`/team/${teamName}/matches/${process.env.REACT_APP_DATA_END_YEAR}`}
+        >
+          More {'>'}
+        </Link>
       </div>
     </div>
   );
