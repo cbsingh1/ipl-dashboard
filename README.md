@@ -1,2 +1,2 @@
 # ipl-dashboard
-[![Demo](https://youtu.be/cYmAPB47zMw)](https://youtu.be/cYmAPB47zMw)
+[![View Demo](https://youtu.be/cYmAPB47zMw?t=12)](https://youtu.be/cYmAPB47zMw)
